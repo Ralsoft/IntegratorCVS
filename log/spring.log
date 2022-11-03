@@ -1,73 +1,210 @@
-2022-10-27 10:33:09.294  INFO 19336 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
-2022-10-27 10:33:09.294  INFO 19336 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
-2022-10-27 10:33:09.294  INFO 19336 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
-2022-10-27 10:50:20.238  INFO 7676 --- [main] r.a.M.IntegratorCVSApplication           : Starting IntegratorCVSApplication using Java 17.0.4.1 on DESKTOP-TLJGED0 with PID 7676 (C:\Users\Sergey\Desktop\JAVA\IntegratorCVS\target\classes started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
-2022-10-27 10:50:20.239  INFO 7676 --- [main] r.a.M.IntegratorCVSApplication           : No active profile set, falling back to 1 default profile: "default"
-2022-10-27 10:50:20.620  INFO 7676 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
-2022-10-27 10:50:20.631  INFO 7676 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
-2022-10-27 10:50:20.705  INFO 7676 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2022-10-27 10:50:20.708  INFO 7676 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2022-10-27 10:50:20.856  INFO 7676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-10-27 10:50:20.870  INFO 7676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-10-27 10:50:20.870  INFO 7676 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
-2022-10-27 10:50:20.940  INFO 7676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-10-27 10:50:20.940  INFO 7676 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 677 ms
-2022-10-27 10:50:20.976  INFO 7676 --- [main] r.a.MqttExample.mqtt.MqttConfiguration   : Создание подключения клиента: ID = DESKTOP-TLJGED0-MQTT, HOST_NAME = 194.87.237.67, PORT = 1883
-2022-10-27 10:50:21.671  INFO 7676 --- [main] r.a.MqttExample.mqtt.MqttConfiguration   : Успешное подключение клиента "DESKTOP-TLJGED0-MQTT" по адресу: tcp://194.87.237.67:1883
-2022-10-27 10:50:21.919  INFO 7676 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
-2022-10-27 10:50:21.919  INFO 7676 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
-2022-10-27 10:50:21.919  INFO 7676 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
-2022-10-27 10:50:21.931  INFO 7676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-10-27 10:50:21.938  INFO 7676 --- [main] r.a.M.IntegratorCVSApplication           : Started IntegratorCVSApplication in 1.969 seconds (JVM running for 2.389)
-2022-10-27 10:52:28.865  INFO 7676 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-10-27 10:52:28.865  INFO 7676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-10-27 10:52:28.866  INFO 7676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-10-27 10:52:28.883  INFO 7676 --- [http-nio-8080-exec-1] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "ABC"
-2022-10-27 10:52:28.883  INFO 7676 --- [http-nio-8080-exec-1] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 10:52:28.915  INFO 7676 --- [http-nio-8080-exec-1] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 10:52:28.916  INFO 7676 --- [http-nio-8080-exec-1] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "ABC"
-2022-10-27 10:52:28.966  INFO 7676 --- [http-nio-8080-exec-1] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "ABC" успешно отправлено на топик "getGRZ"
-2022-10-27 11:17:39.475  INFO 7676 --- [http-nio-8080-exec-4] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "ABC"
-2022-10-27 11:17:39.476  INFO 7676 --- [http-nio-8080-exec-4] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:17:39.477  INFO 7676 --- [http-nio-8080-exec-4] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:17:39.477  INFO 7676 --- [http-nio-8080-exec-4] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "ABC"
-2022-10-27 11:17:39.558  INFO 7676 --- [http-nio-8080-exec-4] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "ABC" успешно отправлено на топик "getGRZ"
-2022-10-27 11:23:33.023  WARN 7676 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
-2022-10-27 11:25:52.296  WARN 7676 --- [http-nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
-2022-10-27 11:28:40.448  WARN 7676 --- [http-nio-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
-2022-10-27 11:30:38.179  WARN 7676 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
-2022-10-27 11:30:51.664  INFO 7676 --- [http-nio-8080-exec-4] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "ABC"
-2022-10-27 11:30:51.665  INFO 7676 --- [http-nio-8080-exec-4] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:30:51.665  INFO 7676 --- [http-nio-8080-exec-4] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:30:51.665  INFO 7676 --- [http-nio-8080-exec-4] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "ABC"
-2022-10-27 11:30:51.750  INFO 7676 --- [http-nio-8080-exec-4] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "ABC" успешно отправлено на топик "getGRZ"
-2022-10-27 11:32:50.818  INFO 7676 --- [http-nio-8080-exec-6] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "123"
-2022-10-27 11:32:50.818  INFO 7676 --- [http-nio-8080-exec-6] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:32:50.819  INFO 7676 --- [http-nio-8080-exec-6] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:32:50.819  INFO 7676 --- [http-nio-8080-exec-6] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "123"
-2022-10-27 11:32:50.891  INFO 7676 --- [http-nio-8080-exec-6] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "123" успешно отправлено на топик "getGRZ"
-2022-10-27 11:33:27.155  INFO 7676 --- [http-nio-8080-exec-7] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "123"
-2022-10-27 11:33:27.156  INFO 7676 --- [http-nio-8080-exec-7] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:33:27.156  INFO 7676 --- [http-nio-8080-exec-7] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:33:27.157  INFO 7676 --- [http-nio-8080-exec-7] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "123"
-2022-10-27 11:33:27.208  INFO 7676 --- [http-nio-8080-exec-7] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "123" успешно отправлено на топик "getGRZ"
-2022-10-27 11:33:38.306  INFO 7676 --- [http-nio-8080-exec-8] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "1234567"
-2022-10-27 11:33:38.306  INFO 7676 --- [http-nio-8080-exec-8] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:33:38.307  INFO 7676 --- [http-nio-8080-exec-8] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:33:38.307  INFO 7676 --- [http-nio-8080-exec-8] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "1234567"
-2022-10-27 11:33:38.380  INFO 7676 --- [http-nio-8080-exec-8] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "1234567" успешно отправлено на топик "getGRZ"
-2022-10-27 11:33:48.534  INFO 7676 --- [http-nio-8080-exec-9] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "987654"
-2022-10-27 11:33:48.534  INFO 7676 --- [http-nio-8080-exec-9] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:33:48.534  INFO 7676 --- [http-nio-8080-exec-9] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:33:48.536  INFO 7676 --- [http-nio-8080-exec-9] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "987654"
-2022-10-27 11:33:48.635  INFO 7676 --- [http-nio-8080-exec-9] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "987654" успешно отправлено на топик "getGRZ"
-2022-10-27 11:33:52.646  INFO 7676 --- [http-nio-8080-exec-10] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "987654"
-2022-10-27 11:33:52.646  INFO 7676 --- [http-nio-8080-exec-10] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:33:52.647  INFO 7676 --- [http-nio-8080-exec-10] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:33:52.647  INFO 7676 --- [http-nio-8080-exec-10] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "987654"
-2022-10-27 11:33:52.698  INFO 7676 --- [http-nio-8080-exec-10] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "987654" успешно отправлено на топик "getGRZ"
-2022-10-27 11:33:56.404  INFO 7676 --- [http-nio-8080-exec-1] r.a.M.controller.MqttController          : Получен топик и ГРЗ. ТОПИК: "getGRZ" ГРЗ: "ASJDJASHD"
-2022-10-27 11:33:56.405  INFO 7676 --- [http-nio-8080-exec-1] r.a.M.controller.MqttController          : Выполнение валидации.
-2022-10-27 11:33:56.405  INFO 7676 --- [http-nio-8080-exec-1] r.a.MqttExample.service.MqttServiceImpl  : Валидация прошла успешно.
-2022-10-27 11:33:56.405  INFO 7676 --- [http-nio-8080-exec-1] r.a.MqttExample.service.MqttServiceImpl  : Совершение GET запроса: /send. ТОПИК: "getGRZ". ГРЗ: "ASJDJASHD"
-2022-10-27 11:33:56.504  INFO 7676 --- [http-nio-8080-exec-1] r.a.MqttExample.service.MqttServiceImpl  : ГРЗ "ASJDJASHD" успешно отправлено на топик "getGRZ"
+2022-11-03 11:08:21.971  INFO 19492 --- [http-nio-8080-exec-5] r.a.M.controller.MqttController          : Получен топик и ГРЗ. TOPIC: Parking/IntegratorCVSPAYLOAD: 12345678 CAM_NUMBER: 23
+2022-11-03 11:08:21.990  INFO 19492 --- [http-nio-8080-exec-5] r.a.MqttExample.mqtt.BaseMqttClient      : Создание подключения клиента: ID = IntegrationCVS, HOST_NAME = 194.87.237.67, PORT = 1883
+2022-11-03 11:08:22.428  INFO 19492 --- [http-nio-8080-exec-5] r.a.MqttExample.mqtt.BaseMqttClient      : Успешное подключение клиента "IntegrationCVS" по адресу: tcp://194.87.237.67:1883
+2022-11-03 11:08:22.428  INFO 19492 --- [http-nio-8080-exec-5] r.a.MqttExample.mqtt.BaseMqttClient      : Попытка публикации TOPIC: Parking/IntegratorCVSPAYLOAD: 12345678 CAM_NUMBER: 23
+2022-11-03 11:08:22.470  INFO 19492 --- [http-nio-8080-exec-5] r.a.MqttExample.mqtt.BaseMqttClient      : ГРЗ "12345678" успешно отправлено на топик "Parking/IntegratorCVS" Номер камеры: 23"
+2022-11-03 11:09:47.845  INFO 19492 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:09:47.846  INFO 19492 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 11:09:47.846  INFO 19492 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:48:51.713  INFO 19748 --- [main] r.a.M.MqttExampleApplicationTests        : Starting MqttExampleApplicationTests using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 19748 (started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 11:48:51.720  INFO 19748 --- [main] r.a.M.MqttExampleApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 11:48:52.244  INFO 19748 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 11:48:52.259  INFO 19748 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 11:48:52.445  INFO 19748 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 11:48:52.463  INFO 19748 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 11:48:53.635  INFO 19748 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:48:53.635  INFO 19748 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 11:48:53.635  INFO 19748 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:48:53.649  INFO 19748 --- [main] r.a.M.MqttExampleApplicationTests        : Started MqttExampleApplicationTests in 2.19 seconds (JVM running for 2.879)
+2022-11-03 11:48:54.177  INFO 19748 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:48:54.180  INFO 19748 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 11:48:54.180  INFO 19748 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:55:41.561  INFO 23368 --- [main] r.a.M.IntegratorCVSApplication           : Starting IntegratorCVSApplication using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 23368 (C:\Users\Sergey\Desktop\JAVA\IntegratorCVS\target\classes started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 11:55:41.562  INFO 23368 --- [main] r.a.M.IntegratorCVSApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 11:55:42.009  INFO 23368 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 11:55:42.018  INFO 23368 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 11:55:42.105  INFO 23368 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 11:55:42.110  INFO 23368 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 11:55:42.264  INFO 23368 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-11-03 11:55:42.269  INFO 23368 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-11-03 11:55:42.269  INFO 23368 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-11-03 11:55:42.337  INFO 23368 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-11-03 11:55:42.337  INFO 23368 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 738 ms
+2022-11-03 11:55:42.790  INFO 23368 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:55:42.790  INFO 23368 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 11:55:42.790  INFO 23368 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:55:42.794  WARN 23368 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-11-03 11:55:42.794  INFO 23368 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:55:42.794  INFO 23368 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 11:55:42.794  INFO 23368 --- [main] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:55:42.797  INFO 23368 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2022-11-03 11:55:42.806  INFO 23368 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-11-03 11:55:42.818 ERROR 23368 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-11-03 11:55:42.819 ERROR 23368 --- [main] r.a.M.IntegratorCVSApplication           : Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-11-03 11:58:41.268  INFO 9596 --- [main] r.a.M.IntegratorCVSApplication           : Starting IntegratorCVSApplication using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 9596 (C:\Users\Sergey\Desktop\JAVA\IntegratorCVS\target\classes started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 11:58:41.269  INFO 9596 --- [main] r.a.M.IntegratorCVSApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 11:58:41.804  INFO 9596 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 11:58:41.823  INFO 9596 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 11:58:42.008  INFO 9596 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 11:58:42.022  INFO 9596 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 11:58:42.261  INFO 9596 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-11-03 11:58:42.269  INFO 9596 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-11-03 11:58:42.270  INFO 9596 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-11-03 11:58:42.389  INFO 9596 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-11-03 11:58:42.389  INFO 9596 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1073 ms
+2022-11-03 11:58:43.170  INFO 9596 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:58:43.171  INFO 9596 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 11:58:43.172  INFO 9596 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:58:43.177  WARN 9596 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-11-03 11:58:43.178  INFO 9596 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 11:58:43.179  INFO 9596 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 11:58:43.179  INFO 9596 --- [main] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 11:58:43.184  INFO 9596 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2022-11-03 11:58:43.197  INFO 9596 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-11-03 11:58:43.217 ERROR 9596 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-11-03 11:58:43.218 ERROR 9596 --- [main] r.a.M.IntegratorCVSApplication           : Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-11-03 12:01:23.557  INFO 19276 --- [main] r.a.M.IntegratorCVSApplication           : Starting IntegratorCVSApplication using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 19276 (C:\Users\Sergey\Desktop\JAVA\IntegratorCVS\target\classes started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 12:01:23.558  INFO 19276 --- [main] r.a.M.IntegratorCVSApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 12:01:23.919  INFO 19276 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 12:01:23.928  INFO 19276 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 12:01:24.021  INFO 19276 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:01:24.027  INFO 19276 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:01:24.180  INFO 19276 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-11-03 12:01:24.186  INFO 19276 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-11-03 12:01:24.186  INFO 19276 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-11-03 12:01:24.252  INFO 19276 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-11-03 12:01:24.252  INFO 19276 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 663 ms
+2022-11-03 12:01:24.612  INFO 19276 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:01:24.612  INFO 19276 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 12:01:24.613  INFO 19276 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:01:24.615  WARN 19276 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-11-03 12:01:24.616  INFO 19276 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:01:24.616  INFO 19276 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 12:01:24.616  INFO 19276 --- [main] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:01:24.618  INFO 19276 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2022-11-03 12:01:24.626  INFO 19276 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-11-03 12:01:24.636 ERROR 19276 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-11-03 12:01:24.636 ERROR 19276 --- [main] r.a.M.IntegratorCVSApplication           : Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-11-03 12:06:16.341  INFO 11804 --- [main] r.a.M.IntegratorCVSApplication           : Starting IntegratorCVSApplication using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 11804 (C:\Users\Sergey\Desktop\JAVA\IntegratorCVS\target\classes started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 12:06:16.342  INFO 11804 --- [main] r.a.M.IntegratorCVSApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 12:06:16.854  INFO 11804 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 12:06:16.869  INFO 11804 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 12:06:16.981  INFO 11804 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:06:16.989  INFO 11804 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:06:17.194  INFO 11804 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-11-03 12:06:17.203  INFO 11804 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-11-03 12:06:17.203  INFO 11804 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-11-03 12:06:17.286  INFO 11804 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-11-03 12:06:17.286  INFO 11804 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 906 ms
+2022-11-03 12:06:17.795  INFO 11804 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:06:17.795  INFO 11804 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 12:06:17.795  INFO 11804 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:06:17.811  INFO 11804 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-03 12:06:17.819  INFO 11804 --- [main] r.a.M.IntegratorCVSApplication           : Started IntegratorCVSApplication in 1.792 seconds (JVM running for 2.805)
+2022-11-03 12:07:14.690  INFO 11804 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:07:14.691  INFO 11804 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 12:07:14.691  INFO 11804 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:08:48.751  INFO 4088 --- [main] r.a.M.IntegratorCVSApplication           : Starting IntegratorCVSApplication using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 4088 (C:\Users\Sergey\Desktop\JAVA\IntegratorCVS\target\classes started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 12:08:48.751  INFO 4088 --- [main] r.a.M.IntegratorCVSApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 12:08:49.122  INFO 4088 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 12:08:49.131  INFO 4088 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 12:08:49.229  INFO 4088 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:08:49.235  INFO 4088 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:08:49.401  INFO 4088 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-11-03 12:08:49.408  INFO 4088 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-11-03 12:08:49.409  INFO 4088 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-11-03 12:08:49.473  INFO 4088 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-11-03 12:08:49.473  INFO 4088 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 691 ms
+2022-11-03 12:08:49.510  INFO 4088 --- [main] r.a.MqttExample.mqtt.BaseMqttClient      : Файл IntegratorConfig.json успешно создан по пути: IntegratorConfig.json
+2022-11-03 12:08:49.852  INFO 4088 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:08:49.852  INFO 4088 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 12:08:49.852  INFO 4088 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:08:49.864  INFO 4088 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-03 12:08:49.871  INFO 4088 --- [main] r.a.M.IntegratorCVSApplication           : Started IntegratorCVSApplication in 1.373 seconds (JVM running for 1.757)
+2022-11-03 12:08:53.479  INFO 4088 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:08:53.480  INFO 4088 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 12:08:53.480  INFO 4088 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:09:29.052  INFO 12448 --- [main] r.a.M.MqttExampleApplicationTests        : Starting MqttExampleApplicationTests using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 12448 (started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 12:09:29.052  INFO 12448 --- [main] r.a.M.MqttExampleApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 12:09:29.623  INFO 12448 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 12:09:29.641  INFO 12448 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 12:09:29.783  INFO 12448 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:09:29.797  INFO 12448 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:09:30.923  INFO 12448 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:09:30.926  INFO 12448 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 12:09:30.926  INFO 12448 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:09:30.938  INFO 12448 --- [main] r.a.M.MqttExampleApplicationTests        : Started MqttExampleApplicationTests in 2.138 seconds (JVM running for 2.759)
+2022-11-03 12:09:31.468  INFO 12448 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:09:31.470  INFO 12448 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 12:09:31.470  INFO 12448 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:19:32.489  INFO 6192 --- [main] r.a.M.MqttExampleApplicationTests        : Starting MqttExampleApplicationTests using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 6192 (started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 12:19:32.491  INFO 6192 --- [main] r.a.M.MqttExampleApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 12:19:33.058  INFO 6192 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 12:19:33.073  INFO 6192 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 12:19:33.219  INFO 6192 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:19:33.231  INFO 6192 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 12:19:34.372  INFO 6192 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:19:34.372  INFO 6192 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 12:19:34.373  INFO 6192 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 12:19:34.384  INFO 6192 --- [main] r.a.M.MqttExampleApplicationTests        : Started MqttExampleApplicationTests in 2.154 seconds (JVM running for 2.785)
+2022-11-03 12:19:34.883  INFO 6192 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 12:19:34.884  INFO 6192 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 12:19:34.884  INFO 6192 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2022-11-03 14:55:37.488  INFO 5716 --- [main] r.a.M.MqttExampleApplicationTests        : Starting MqttExampleApplicationTests using Java 17.0.5 on DESKTOP-G2NTFAQ with PID 5716 (started by Sergey in C:\Users\Sergey\Desktop\JAVA\IntegratorCVS)
+2022-11-03 14:55:37.488  INFO 5716 --- [main] r.a.M.MqttExampleApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2022-11-03 14:55:38.070  INFO 5716 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2022-11-03 14:55:38.086  INFO 5716 --- [main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2022-11-03 14:55:38.240  INFO 5716 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 14:55:38.252  INFO 5716 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-11-03 14:55:39.469  INFO 5716 --- [main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 14:55:39.469  INFO 5716 --- [main] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 1 subscriber(s).
+2022-11-03 14:55:39.471  INFO 5716 --- [main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2022-11-03 14:55:39.485  INFO 5716 --- [main] r.a.M.MqttExampleApplicationTests        : Started MqttExampleApplicationTests in 2.251 seconds (JVM running for 2.88)
+2022-11-03 14:55:40.005  INFO 5716 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2022-11-03 14:55:40.005  INFO 5716 --- [SpringApplicationShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'application.errorChannel' has 0 subscriber(s).
+2022-11-03 14:55:40.005  INFO 5716 --- [SpringApplicationShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'

@@ -2,37 +2,28 @@ package ru.artsec.MqttExample.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.artsec.MqttExample.service.MqttService;
+import org.springframework.web.bind.annotation.RestController;
+import ru.artsec.MqttExample.service.MqttServiceImpl;
 
-@Controller
+@RestController
 public class MqttController {
-
-    final MqttService mqttService;
     Logger log = LoggerFactory.getLogger(MqttController.class);
 
-    public MqttController(MqttService mqttService) {
+    final MqttServiceImpl mqttService;
+
+    public MqttController(MqttServiceImpl mqttService) {
         this.mqttService = mqttService;
     }
 
     @GetMapping("/send")
-    public String sendMessage(String topic, String payload) {
+    public void sendMessage(String topic, String payload, int camNumber) {
         try {
-            log.info("Получен топик и ГРЗ. ТОПИК: \"" + topic + "\" ГРЗ: \"" + payload + "\"");
-            log.info("Выполнение валидации.");
+            log.info("Получен топик и ГРЗ. TOPIC: " + topic + "PAYLOAD: " + payload + " CAM_NUMBER: " + camNumber);
 
-            mqttService.publish(topic, payload);
+            mqttService.publishMessage(topic, payload, camNumber);
         } catch (Exception e) {
             log.error("Ошибка: " + e);
         }
-        return "hello";
-    }
-
-    @GetMapping("/greeting")
-    public String greeting(Model model){
-        model.addAttribute("greeting", "Hello World");
-        return "hello";
     }
 }

@@ -6,10 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IntegratorCVSApplication {
+public class IntegratorCVSApplication{
 
     private static final Logger log = LoggerFactory.getLogger(IntegratorCVSApplication.class);
-
     public static void main(String[] args) {
         try {
             log.info("Запуск программы.");
@@ -18,5 +17,4 @@ public class IntegratorCVSApplication {
             log.error(ex.getMessage());
         }
     }
-
 }
