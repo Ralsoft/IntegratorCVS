@@ -46,36 +46,41 @@ public class BaseMqttClient implements MqttService {
         }
     }
 
-    public void connectionClient() throws IOException, MqttException {
-        mqttConfig = new File("IntegratorConfig.json");
+    public void connectionClient() {
+        try {
+            mqttConfig = new File("IntegratorConfig.json");
 
-        isNewFile(mqttConfig);
+            isNewFile(mqttConfig);
 
-        mapper = new ObjectMapper();
-        mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
+            mapper = new ObjectMapper();
+            mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
 
-        log.info("Создание подключения клиента: ID = " + mqttClientModel.getClientId() + ", HOST_NAME = " + mqttClientModel.getHostName() + ", PORT = " + mqttClientModel.getPort());
+            log.info("Создание подключения клиента: HOST_NAME = " + mqttClientModel.getMqttClientIp() + ", PORT = " + mqttClientModel.getMqttClientPort());
 
-        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
-        mqttConnectOptions.setConnectionTimeout(5000);
-        mqttConnectOptions.setAutomaticReconnect(true);
-        mqttConnectOptions.setCleanSession(true);
-        mqttConnectOptions.setKeepAliveInterval(10000);
+            MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+            mqttConnectOptions.setConnectionTimeout(5000);
+            mqttConnectOptions.setAutomaticReconnect(true);
+            mqttConnectOptions.setCleanSession(true);
+            mqttConnectOptions.setKeepAliveInterval(3000);
 
-        mqttClient = new org.eclipse.paho.client.mqttv3.MqttClient("tcp://" + mqttClientModel.getHostName() + ":" + mqttClientModel.getPort(), mqttClientModel.getClientId());
-        mqttClient.connect();
+            mqttClient = new MqttClient("tcp://" + mqttClientModel.getMqttClientIp() + ":" + mqttClientModel.getMqttClientPort(), MqttClient.generateClientId());
+            mqttClient.connect();
 
-        log.info("Успешное подключение клиента \"" + mqttClientModel.getClientId() + "\" по адресу: " + mqttClient.getServerURI());
+            log.info("Успешное подключение клиента по адресу: " + mqttClient.getServerURI());
+        } catch (Exception ex) {
+            log.error("Ошибка: " + ex.getMessage());
+        }
+
     }
 
     void isNewFile(File file) {
         try {
             if (file.createNewFile()) {
-                log.info("Файл " + file.getName() + " успешно создан по пути: " + file.getPath());
-
                 FileOutputStream out = new FileOutputStream(file);
                 out.write(new MQTTClientModel().toString().getBytes());
                 out.close();
+                log.info("Файл конфигурации успешно создан. Запустите программу заново.  ПУТЬ: " + file.getAbsolutePath());
+                System.exit(0);
             }
         } catch (IOException e) {
             log.error("Ошибка: " + e.getMessage());
@@ -83,7 +88,7 @@ public class BaseMqttClient implements MqttService {
     }
 
     @Bean
-    void createFileConfig(){
+    void createFileConfig() {
         mqttConfig = new File("IntegratorConfig.json");
         isNewFile(mqttConfig);
     }

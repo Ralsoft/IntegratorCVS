@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class MQTTClientModel {
-    String clientId;
-    String hostName;
-    int port;
+    String mqttClientId = "Integrator";
+    String mqttClientIp = "194.87.237.67";
+    int mqttClientPort = 1883;
 
     public MQTTClientModel() {
     }
@@ -14,15 +14,15 @@ public class MQTTClientModel {
     @Override
     public String toString() {
         return "{" + "\n" +
-                "\"clientId\": \"" + clientId + "\",\n" +
-                "\"hostName\": \"" + hostName + "\",\n" +
-                "\"port\": " + port + "\n" +
+                "\"mqttClientId\": \"" + mqttClientId + "\",\n" +
+                "\"mqttClientIp\": \"" + mqttClientIp + "\",\n" +
+                "\"mqttClientPort\": " + mqttClientPort + "\n" +
                 '}';
     }
 
-    public MQTTClientModel(String clientId, String hostName, int port) {
-        this.clientId = clientId;
-        this.hostName = hostName;
-        this.port = port;
+    public MQTTClientModel(String mqttClientId, String mqttClientIp, int mqttClientPort) {
+        this.mqttClientId = mqttClientId;
+        this.mqttClientIp = mqttClientIp;
+        this.mqttClientPort = mqttClientPort;
     }
 }
