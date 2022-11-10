@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class IntegratorCVSModel {
     String GRZ;
-    int camNumber;
+    String camNumber;
 
-    public IntegratorCVSModel(String GRZ, int camNumber) {
+    public IntegratorCVSModel(String GRZ, String camNumber) {
         this.GRZ = GRZ;
         this.camNumber = camNumber;
     }

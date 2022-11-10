@@ -14,7 +14,7 @@ public class MqttServiceImpl {
         this.mqttService = mqttService;
     }
 
-    public void publishMessage(String topic, String payload, int camNumber) {
-        mqttService.publish(topic, payload, camNumber);
+    public void publishMessage(String topic, String payload, String camNumber, boolean flag) throws InterruptedException {
+        mqttService.publish(topic, payload, camNumber,flag);
     }
 }

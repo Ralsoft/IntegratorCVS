@@ -3,7 +3,6 @@ package ru.artsec.MqttExample.mqtt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,30 +27,8 @@ public class BaseMqttClient implements MqttService {
     MqttMessage mqttMessage;
 
     @Override
-    public void publish(String topic, String payload, int camNumber) {
+    public void publish(String topic, String payload, String camNumber, boolean flag) throws InterruptedException {
         try {
-            connectionClient();
-            log.info("Попытка публикации TOPIC: " + topic + "PAYLOAD: " + payload + " CAM_NUMBER: " + camNumber);
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber));
-
-            mqttMessage = new MqttMessage();
-            mqttMessage.setPayload(json.getBytes());
-            mqttClient.publish(topic, mqttMessage);
-            mqttClient.disconnect();
-            log.info("ГРЗ \"" + payload + "\" успешно отправлено на топик \"" + topic + "\" Номер камеры: " + camNumber + "\"");
-        } catch (Exception e) {
-            log.error("Ошибка: " + e);
-        }
-    }
-
-    public void connectionClient() {
-        try {
-            mqttConfig = new File("IntegratorConfig.json");
-
-            isNewFile(mqttConfig);
-
             mapper = new ObjectMapper();
             mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
 
@@ -61,16 +38,30 @@ public class BaseMqttClient implements MqttService {
             mqttConnectOptions.setConnectionTimeout(5000);
             mqttConnectOptions.setAutomaticReconnect(true);
             mqttConnectOptions.setCleanSession(true);
-            mqttConnectOptions.setKeepAliveInterval(3000);
+            mqttConnectOptions.setUserName(mqttClientModel.getMqttUsername());
+            mqttConnectOptions.setPassword(mqttClientModel.getMqttPassword().toCharArray());
 
             mqttClient = new MqttClient("tcp://" + mqttClientModel.getMqttClientIp() + ":" + mqttClientModel.getMqttClientPort(), MqttClient.generateClientId());
-            mqttClient.connect();
-
+            mqttClient.connect(mqttConnectOptions);
             log.info("Успешное подключение клиента по адресу: " + mqttClient.getServerURI());
-        } catch (Exception ex) {
-            log.error("Ошибка: " + ex.getMessage());
-        }
 
+            if (flag) {
+                log.info("Попытка публикации TOPIC: " + topic + "PAYLOAD: " + payload + " CAM_NUMBER: " + camNumber);
+                ObjectMapper mapper = new ObjectMapper();
+                String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber));
+
+                mqttMessage = new MqttMessage();
+                mqttMessage.setQos(0);
+                mqttMessage.setPayload(json.getBytes());
+                mqttClient.publish(topic, mqttMessage);
+                log.info("ГРЗ \"" + payload + "\" успешно отправлено на топик \"" + topic + "\" Номер камеры: " + camNumber + "\"");
+            }
+            mqttClient.disconnect();
+        } catch (Exception ex) {
+            Thread.sleep(5000);
+            log.error("Ошибка: " + ex);
+            if (!mqttClient.isConnected()) publish(topic, payload, camNumber, false);
+        }
     }
 
     void isNewFile(File file) {
@@ -80,7 +71,7 @@ public class BaseMqttClient implements MqttService {
                 out.write(new MQTTClientModel().toString().getBytes());
                 out.close();
                 log.info("Файл конфигурации успешно создан. Запустите программу заново.  ПУТЬ: " + file.getAbsolutePath());
-                System.exit(0);
+                System.exit(1);
             }
         } catch (IOException e) {
             log.error("Ошибка: " + e.getMessage());
