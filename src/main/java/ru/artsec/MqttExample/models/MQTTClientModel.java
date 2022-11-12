@@ -20,15 +20,4 @@ public class MQTTClientModel {
         this.mqttUsername = mqttUsername;
         this.mqttPassword = mqttPassword;
     }
-
-    @Override
-    public String toString() {
-        return "{" + "\n" +
-                "\"mqttClientId\": \"" + mqttClientId + "\",\n" +
-                "\"mqttClientIp\": \"" + mqttClientIp + "\",\n" +
-                "\"mqttClientPort\": " + mqttClientPort + "\n" +
-                "\"mqttUsername\": " + mqttUsername + "\n" +
-                "\"mqttPassword\": " + mqttPassword + "\n" +
-                '}';
-    }
 }

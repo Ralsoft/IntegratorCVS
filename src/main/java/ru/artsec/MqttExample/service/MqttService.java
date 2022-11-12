@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 @Validated
 public interface MqttService {
     void publish(
+
             String topic,
 
             @NotNull
@@ -22,5 +23,6 @@ public interface MqttService {
             String camNumber,
 
             boolean flag
+
     ) throws InterruptedException;
 }

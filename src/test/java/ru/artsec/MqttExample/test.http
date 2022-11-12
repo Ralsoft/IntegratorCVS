@@ -1,1 +1,1 @@
-GET http://localhost:8080/send?topic=Parking/IntegratorCVS&payload=A133XTQ49&camNumber=3
+GET http://localhost:8080/send?topic=Parking/IntegratorCVS&payload=A1&camNumber=1
