@@ -48,16 +48,18 @@ public class MqttServiceImpl implements MqttService {
                 String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber));
 
                 mqttMessage = new MqttMessage();
-                mqttMessage.setQos(0);
+                mqttMessage.setRetained(false);
                 mqttMessage.setPayload(json.getBytes());
                 mqttClient.publish(topic, mqttMessage);
                 log.info("ГРЗ \"" + payload + "\" успешно отправлено на топик \"" + topic + "\" Номер камеры: " + camNumber + "\"");
             }
             mqttClient.disconnect();
         } catch (Exception ex) {
-            Thread.sleep(5000);
             log.error("Ошибка: " + ex);
-            if (!mqttClient.isConnected()) publish(topic, payload, camNumber, false);
+            if (!mqttClient.isConnected()){
+                Thread.sleep(5000);
+                publish(topic, payload, camNumber, false);
+            }
         }
     }
 
