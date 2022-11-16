@@ -31,20 +31,34 @@ public class MqttServiceImpl implements MqttService {
         try {
             MQTTClientModel mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
 
-            log.info("Создание подключения клиента: HOST_NAME = " + mqttClientModel.getMqttClientIp() + ", PORT = " + mqttClientModel.getMqttClientPort());
-            mqttClient = new MqttClient("tcp://" + mqttClientModel.getMqttClientIp() + ":" + mqttClientModel.getMqttClientPort(), InetAddress.getLocalHost() + "-Integration");
+            log.info(
+                    "Создание подключения клиента: HOST_NAME = " + mqttClientModel.getMqttClientIp() +
+                    ", PORT = " + mqttClientModel.getMqttClientPort() +
+                    ", USERNAME = " + mqttClientModel.getMqttUsername() +
+                    ", PASSWORD = " + mqttClientModel.getMqttPassword()
+                    );
+            mqttClient = new MqttClient(
+                    "tcp://" + mqttClientModel.getMqttClientIp() + ":" +
+                    mqttClientModel.getMqttClientPort(),
+                    InetAddress.getLocalHost() + "-Integration"
+                    );
             MqttConnectOptions options = new MqttConnectOptions();
             options.setAutomaticReconnect(true);
             options.setConnectionTimeout(5000);
             options.setUserName(mqttClientModel.getMqttUsername());
             options.setPassword(mqttClientModel.getMqttPassword().toCharArray());
 
+            log.info(
+                    "Выставленные настройки MQTT: " +
+                    "Автоматический реконнект = " + options.isAutomaticReconnect() + ", " +
+                    "Максимальное время подключения = " + options.getConnectionTimeout()
+                    );
             mqttClient.connect(options);
 
             log.info("Успешное подключение клиента по адресу: " + mqttClient.getServerURI());
 
             if (flag) {
-                log.info("Попытка публикации TOPIC: " + topic + "PAYLOAD: " + payload + " CAM_NUMBER: " + camNumber);
+                log.info("Начинается публикация. TOPIC: " + topic + ", PAYLOAD: " + payload + ", CAM_NUMBER: " + camNumber);
                 ObjectMapper mapper = new ObjectMapper();
                 String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber));
 
@@ -52,9 +66,10 @@ public class MqttServiceImpl implements MqttService {
                 mqttMessage.setRetained(false);
                 mqttMessage.setPayload(json.getBytes());
                 mqttClient.publish(topic, mqttMessage);
-                log.info("ГРЗ \"" + payload + "\" успешно отправлено на топик \"" + topic + "\" Номер камеры: " + camNumber + "\"");
+                log.info("Публикация прошла успешно. Опубликовано = " + json);
             }
             mqttClient.disconnect();
+            log.info("Соединение с MQTT разорвано. " + mqttClient.getServerURI());
         } catch (Exception ex) {
             log.error("Ошибка: " + ex);
             if (!mqttClient.isConnected()){
@@ -78,7 +93,7 @@ public class MqttServiceImpl implements MqttService {
                 System.exit(1);
             }
         } catch (IOException e) {
-            log.error("Ошибка: " + e.getMessage());
+            log.error("Ошибка: " + e);
         }
     }
 
