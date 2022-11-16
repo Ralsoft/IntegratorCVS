@@ -15,6 +15,7 @@ import ru.artsec.MqttExample.models.MQTTClientModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 
 @Service
 public class MqttServiceImpl implements MqttService {
@@ -31,7 +32,7 @@ public class MqttServiceImpl implements MqttService {
             MQTTClientModel mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
 
             log.info("Создание подключения клиента: HOST_NAME = " + mqttClientModel.getMqttClientIp() + ", PORT = " + mqttClientModel.getMqttClientPort());
-            mqttClient = new MqttClient("tcp://" + mqttClientModel.getMqttClientIp() + ":" + mqttClientModel.getMqttClientPort(), MqttClient.generateClientId());
+            mqttClient = new MqttClient("tcp://" + mqttClientModel.getMqttClientIp() + ":" + mqttClientModel.getMqttClientPort(), InetAddress.getLocalHost() + "-Integration");
             MqttConnectOptions options = new MqttConnectOptions();
             options.setAutomaticReconnect(true);
             options.setConnectionTimeout(5000);
