@@ -2,9 +2,7 @@ package ru.artsec.MqttExample.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -21,32 +19,61 @@ import java.net.InetAddress;
 public class MqttServiceImpl implements MqttService {
 
     private final static Logger log = LoggerFactory.getLogger(MqttServiceImpl.class);
-    MqttClient mqttClient;
     ObjectMapper mapper = new ObjectMapper();
     File mqttConfig = new File("IntegratorConfig.json");
     MqttMessage mqttMessage;
 
+
     @Override
     public void publish(String topic, String payload, String camNumber, boolean flag) throws InterruptedException {
+        MQTTClientModel mqttClientModel = null;
         try {
-            MQTTClientModel mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
+            mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try(MqttClient mqttClient = new MqttClient(
+                "tcp://" + mqttClientModel.getMqttClientIp() + ":" +
+                mqttClientModel.getMqttClientPort(),
+                InetAddress.getLocalHost() + "-Integration"
+                    )) {
 
             log.info(
-                    "Создание подключения клиента: HOST_NAME = " + mqttClientModel.getMqttClientIp() +
+                    "Создание подключения клиента... HOST_NAME = " + mqttClientModel.getMqttClientIp() +
                     ", PORT = " + mqttClientModel.getMqttClientPort() +
                     ", USERNAME = " + mqttClientModel.getMqttUsername() +
                     ", PASSWORD = " + mqttClientModel.getMqttPassword()
                     );
-            mqttClient = new MqttClient(
-                    "tcp://" + mqttClientModel.getMqttClientIp() + ":" +
-                    mqttClientModel.getMqttClientPort(),
-                    InetAddress.getLocalHost() + "-Integration"
-                    );
+
+
             MqttConnectOptions options = new MqttConnectOptions();
             options.setAutomaticReconnect(true);
             options.setConnectionTimeout(5000);
             options.setUserName(mqttClientModel.getMqttUsername());
             options.setPassword(mqttClientModel.getMqttPassword().toCharArray());
+
+            mqttClient.setCallback(new MqttCallbackExtended() {
+                @Override
+                public void connectComplete(boolean reconnect, String serverURI) {
+
+                }
+
+                @Override
+                public void connectionLost(Throwable cause) {
+                    log.warn("Соединение потеряно!");
+                }
+
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken token) {
+
+                }
+            });
 
             log.info(
                     "Выставленные настройки MQTT: " +
@@ -63,20 +90,14 @@ public class MqttServiceImpl implements MqttService {
                 String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber));
 
                 mqttMessage = new MqttMessage();
-                mqttMessage.setRetained(false);
                 mqttMessage.setPayload(json.getBytes());
                 mqttClient.publish(topic, mqttMessage);
                 log.info("Публикация прошла успешно. Опубликовано = " + json);
             }
-            mqttClient.disconnect();
-            log.info("Соединение с MQTT разорвано. " + mqttClient.getServerURI());
         } catch (Exception ex) {
             log.error("Ошибка: " + ex);
-            if (!mqttClient.isConnected()){
-                Thread.sleep(5000);
-                publish(topic, payload, camNumber, false);
-            }
         }
+        log.info("Соединение с MQTT разорвано.");
     }
 
     private void isNewFile(File file) {

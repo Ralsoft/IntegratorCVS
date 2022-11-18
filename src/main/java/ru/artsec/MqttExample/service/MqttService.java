@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 public interface MqttService {
     void publish(
 
+            @NotNull
             String topic,
 
             @NotNull
