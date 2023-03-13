@@ -1,10 +1,13 @@
 package ru.artsec.MqttExample.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.artsec.MqttExample.models.CvsModel;
 import ru.artsec.MqttExample.service.MqttService;
 
 @Controller
@@ -17,19 +20,26 @@ public class MqttController {
         this.mqttService = mqttService;
     }
 
-    @GetMapping("/send")
-    public String sendMessage(String topic, String payload, String camNumber, Model model) {
+    @ResponseBody
+    @PostMapping("/send")
+    public String sendMessage(Model model, HttpEntity<String> httpEntity) {
         try {
-            Thread.sleep(1000);
+            String topic = "Parking/IntegratorCVS";
+            String json = httpEntity.getBody();
+            ObjectMapper mapper = new ObjectMapper();
+            CvsModel models = mapper.readValue(json, CvsModel.class); // Модель пришедшего JSON
+            log.info("Получен JSON = " + mapper.writeValueAsString(models));
+
             boolean flag = true;
-            log.info("Получен GET запрос. TOPIC: " + topic + "PAYLOAD: " + payload + " CAM_NUMBER: " + camNumber);
+            log.info("Получен POST запрос. TOPIC: " + topic + "PAYLOAD: " + models.getPlate().getPlate() + " CAM_NUMBER: " + models.getPlate().getCamera());
             model.addAttribute("topic", topic);
-            model.addAttribute("payload", payload);
-            model.addAttribute("camNumber", camNumber);
-            mqttService.publish(topic, payload, camNumber, flag);
+            model.addAttribute("payload", models.getPlate().getPlate());
+            model.addAttribute("camNumber", models.getPlate().getCamera());
+            mqttService.publish(topic, models.getPlate().getPlate(),models.getPlate().getCamera(), flag);
+            return json;
         } catch (Exception e) {
             log.error("Ошибка: " + e);
         }
-        return "index";
+        return "Fail :(";
     }
 }

@@ -1,1 +1,22 @@
-GET http://localhost:8080/send?topic=Parking/IntegratorCVS&payload=1233&camNumber=1
+POST http://localhost:8080/send
+
+{
+  "messageId":"e28dfc8b-4888-4d8a-9759-86c76f9345c4",
+  "plate" : {
+     "camera":2,
+     "channel":2,
+     "dateTime":"20221128T113251Z",
+     "description":"---",
+     "direction":0,
+     "groupId":-1,
+     "id":1183,
+     "image":"imageURL",
+     "inList":1,
+     "passed":0,
+     "plate":"B990KA797",
+     "quality":"555555555000",
+     "stayTimeMinutes":0,
+     "type":0,
+     "weight":0
+   }
+}

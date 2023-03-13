@@ -22,7 +22,7 @@ public class MqttServiceImpl implements MqttService {
     ObjectMapper mapper = new ObjectMapper();
     File mqttConfig = new File("IntegratorConfig.json");
     MqttMessage mqttMessage;
-
+    MqttClient mqttClient;
 
     @Override
     public void publish(String topic, String payload, String camNumber, boolean flag) throws InterruptedException {
@@ -33,12 +33,7 @@ public class MqttServiceImpl implements MqttService {
             throw new RuntimeException(e);
         }
 
-        try(MqttClient mqttClient = new MqttClient(
-                "tcp://" + mqttClientModel.getMqttClientIp() + ":" +
-                mqttClientModel.getMqttClientPort(),
-                InetAddress.getLocalHost() + "-Integration"
-                    )) {
-
+        try {
             log.info(
                     "Создание подключения клиента... HOST_NAME = " + mqttClientModel.getMqttClientIp() +
                     ", PORT = " + mqttClientModel.getMqttClientPort() +
@@ -46,17 +41,33 @@ public class MqttServiceImpl implements MqttService {
                     ", PASSWORD = " + mqttClientModel.getMqttPassword()
                     );
 
+            if(mqttClient == null) {
+                MqttConnectOptions options = new MqttConnectOptions();
+                options.setAutomaticReconnect(true);
+                options.setConnectionTimeout(5000);
+                options.setUserName(mqttClientModel.getMqttUsername());
+                options.setPassword(mqttClientModel.getMqttPassword().toCharArray());
 
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setAutomaticReconnect(true);
-            options.setConnectionTimeout(5000);
-            options.setUserName(mqttClientModel.getMqttUsername());
-            options.setPassword(mqttClientModel.getMqttPassword().toCharArray());
+                mqttClient = new MqttClient(
+                        "tcp://" + mqttClientModel.getMqttClientIp() + ":" +
+                                mqttClientModel.getMqttClientPort(),
+                        InetAddress.getLocalHost() + "-Integration"
+                );
+                log.info(
+                        "Выставленные настройки MQTT: " +
+                                "Автоматический реконнект = " + options.isAutomaticReconnect() + ", " +
+                                "Максимальное время подключения = " + options.getConnectionTimeout()
+                );
+                mqttClient.connect(options);
+
+                log.info("Успешное подключение клиента по адресу: " + mqttClient.getServerURI());
+            }
+
 
             mqttClient.setCallback(new MqttCallbackExtended() {
                 @Override
                 public void connectComplete(boolean reconnect, String serverURI) {
-
+                    log.info("Соединение присутствует!");
                 }
 
                 @Override
@@ -75,15 +86,6 @@ public class MqttServiceImpl implements MqttService {
                 }
             });
 
-            log.info(
-                    "Выставленные настройки MQTT: " +
-                    "Автоматический реконнект = " + options.isAutomaticReconnect() + ", " +
-                    "Максимальное время подключения = " + options.getConnectionTimeout()
-                    );
-            mqttClient.connect(options);
-
-            log.info("Успешное подключение клиента по адресу: " + mqttClient.getServerURI());
-
             if (flag) {
                 log.info("Начинается публикация. TOPIC: " + topic + ", PAYLOAD: " + payload + ", CAM_NUMBER: " + camNumber);
                 ObjectMapper mapper = new ObjectMapper();
@@ -97,7 +99,6 @@ public class MqttServiceImpl implements MqttService {
         } catch (Exception ex) {
             log.error("Ошибка: " + ex);
         }
-        log.info("Соединение с MQTT разорвано.");
     }
 
     private void isNewFile(File file) {

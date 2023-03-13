@@ -14,7 +14,7 @@ public class IntegratorCVSApplication{
             log.info("Запуск программы.");
             SpringApplication.run(IntegratorCVSApplication.class, args);
         } catch (Exception ex) {
-            log.error(ex.getMessage());
+            log.error("Ошибка: " + ex);
         }
     }
 }
