@@ -10,8 +10,14 @@ public class MQTTClientModel {
     String mqttUsername = "admin";
     String mqttPassword = "333";
 
+    Boolean doSaveFile = true;
+
+    String publishTopic = "Parking/IntegratorCVS";
+
     public MQTTClientModel() {
+
     }
+
 
     public MQTTClientModel(String mqttClientId, String mqttClientIp, int mqttClientPort, String mqttUsername, String mqttPassword) {
         this.mqttClientId = mqttClientId;

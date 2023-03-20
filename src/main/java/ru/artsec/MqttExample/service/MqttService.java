@@ -23,6 +23,8 @@ public interface MqttService {
             @Pattern(regexp = "^[A-Za-z\\d]+$", message = "Название канала ГРЗ содержит недопустимые символы.")
             String camNumber,
 
+            String fileName,
+
             boolean flag
 
     ) throws InterruptedException;

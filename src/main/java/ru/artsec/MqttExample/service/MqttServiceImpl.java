@@ -25,7 +25,7 @@ public class MqttServiceImpl implements MqttService {
     MqttClient mqttClient;
 
     @Override
-    public void publish(String topic, String payload, String camNumber, boolean flag) throws InterruptedException {
+    public void publish(String topic, String payload, String camNumber, String path,  boolean flag) throws InterruptedException {
         MQTTClientModel mqttClientModel = null;
         try {
             mqttClientModel = mapper.readValue(mqttConfig, MQTTClientModel.class);
@@ -89,7 +89,7 @@ public class MqttServiceImpl implements MqttService {
             if (flag) {
                 log.info("Начинается публикация. TOPIC: " + topic + ", PAYLOAD: " + payload + ", CAM_NUMBER: " + camNumber);
                 ObjectMapper mapper = new ObjectMapper();
-                String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber));
+                String json = mapper.writeValueAsString(new IntegratorCVSModel(payload, camNumber, path));
 
                 mqttMessage = new MqttMessage();
                 mqttMessage.setPayload(json.getBytes());
@@ -101,7 +101,7 @@ public class MqttServiceImpl implements MqttService {
         }
     }
 
-    private void isNewFile(File file) {
+    private static void isNewFile(File file) {
         try {
             if (file.createNewFile()) {
                 FileOutputStream out = new FileOutputStream(file);
@@ -123,5 +123,19 @@ public class MqttServiceImpl implements MqttService {
     private void createFileConfig() {
         mqttConfig = new File("IntegratorConfig.json");
         isNewFile(mqttConfig);
+    }
+
+    public static MQTTClientModel getConfigParam() {
+        MQTTClientModel model = null;
+        try {
+            model = new MQTTClientModel();
+            ObjectMapper mapper = new ObjectMapper();
+            File file = new File("IntegratorConfig.json");
+            isNewFile(file);
+            model = mapper.readValue(file, MQTTClientModel.class);
+        } catch (IOException e) {
+            log.error("Ошибка: " + e.getMessage());
+        }
+        return model;
     }
 }
